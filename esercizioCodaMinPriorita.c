@@ -15,6 +15,8 @@ MinHeap newMinHeap(int size){
 
 	if (size < 0)
 		return NULL;
+	if (size == 0)
+		size = 1;
 
 	new = (MinHeap) malloc(sizeof(struct minHeap));
 	new->dim = size;
@@ -31,23 +33,26 @@ int heapEmpty(MinHeap v){
 	if (v != NULL)
 		return v->heapsize;
 
-	return -1;   //solo se v punta a NULL
+	return 0;   //solo se v punta a NULL
 }
 
 /*pre: la coda e' non vuota */
 /*post: restituisce la chiave piu' piccola nella coda */
 
 int heapMinimum(MinHeap v){
-
-.......................................
+	return elements[0];
 }
 
 /*pre: la coda e' non vuota */
 /*post: elimina e restituisce la chiave piu' piccola nella coda */
 
 int heapExtractMin(MinHeap v){
-  
- .....................................
+	int min = elements[0];
+	int aux = elements[v->heapsize];
+	
+	elements[0] = elements[v->heapsize];
+	(v->heapsize)--;
+
 }
 
 /*pre: i e' un nodo dell'heap */

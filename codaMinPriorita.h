@@ -1,6 +1,6 @@
 typedef struct minHeap *MinHeap;
 
-MinHeap newMinHeap();
+MinHeap newMinHeap(int size);
 int heapEmpty(MinHeap v);
 int heapMinimum(MinHeap v);
 int heapExtractMin(MinHeap v);
