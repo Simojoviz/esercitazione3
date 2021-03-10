@@ -31,10 +31,10 @@ MinHeap newMinHeap(int size){
 /*post: restituisce >0 se la coda di min-priorita' e' vuota, 0 atrimenti */
 int heapEmpty(MinHeap v){
 
-	if (v != NULL)
-		return v->heapsize;
+	if (v != NULL && v->heapsize)
+		return 0;
 
-	return 0;   //solo se v punta a NULL
+	return 1;   //solo se v punta a NULL
 }
 
 /*pre: la coda e' non vuota */
@@ -90,6 +90,7 @@ int heapExtractMin(MinHeap v){
 /*post: decrementa il valore della chiave dell'elemento in posizione i al valore k (k <= valore corrente dell'elemento in posizione i) */
 
 void heapDecreaseKey(MinHeap v, int i, int k){
+	int temp;
 	if (k > v->elements[i]) {
 		fprintf(stderr, "key larger than the current one\n");
 		return;
@@ -112,7 +113,7 @@ void heapInsert(MinHeap v, int k){
 	}
 
 	(v->heapsize)++;
-	v->elements[v->heapsize - 1] = INT_MIN;
+	v->elements[v->heapsize - 1] = INT_MAX;
 	heapDecreaseKey(v, v->heapsize - 1, k);
 }
 
@@ -137,7 +138,7 @@ void heapDelete(MinHeap v, int i){
 int heapSearch(MinHeap v, int k){
 	int i = 0;
 	while (i < v->heapsize) {
-		if (v->elements[i] = k)
+		if (v->elements[i] == k)
 			return i;
 
 		i++;
