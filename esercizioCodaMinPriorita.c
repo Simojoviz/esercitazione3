@@ -31,10 +31,10 @@ MinHeap newMinHeap(int size){
 /*post: restituisce >0 se la coda di min-priorita' e' vuota, 0 atrimenti */
 int heapEmpty(MinHeap v){
 
-	if (v != NULL && v->heapsize)
+	if (v != NULL && v->heapsize > 0)
 		return 0;
 
-	return 1;   //solo se v punta a NULL
+	return 1;   
 }
 
 /*pre: la coda e' non vuota */
@@ -50,12 +50,12 @@ void min_heapfy(MinHeap v, int i) {
 	int min;
 	int temp;
 
-	if (l < (v->heapsize - 1) && v->elements[l] < v->elements[i]) 
+	if (l < heapsize(v) && v->elements[l] < v->elements[i]) 
 		min = l;
 	else 
 		min = i;
 
-	if (r < (v->heapsize - 1)&& v->elements[r] < v->elements[min]) 
+	if (r < heapsize(v) && v->elements[r] < v->elements[min]) 
 		min = r;
 	
 	if (i != min) {
@@ -74,11 +74,11 @@ void min_heapfy(MinHeap v, int i) {
 int heapExtractMin(MinHeap v){
 	int min = v->elements[0];
 	
-	v->elements[0] = v->elements[v->heapsize - 1];
+	v->elements[0] = v->elements[heapsize(v) - 1];
 	(v->heapsize)--;
 	min_heapfy(v, 0);
 
-	if (v->heapsize <= (v->dim)/4) {
+	if (heapsize(v) <= (v->dim)/4) {
 		v->dim = v->dim / 2;
 		v->elements = (int *) realloc(v->elements, sizeof(int) * v->dim);
 	}
@@ -123,7 +123,7 @@ void heapInsert(MinHeap v, int k){
 
 void heapDelete(MinHeap v, int i){
 	v->elements[i] = v->elements[v->heapsize - 1];
-	(v->heapsize) --;
+	(v->heapsize)--;
 	min_heapfy(v, i);
 
 	if (v->heapsize <= (v->dim)/4) {
