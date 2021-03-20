@@ -7,6 +7,7 @@
 struct elem{
   int key;
   int info;
+  int pos;
 };
 
 
@@ -60,6 +61,7 @@ void inserisci(Dizionario d, int k, int val){
   newElem = (Elem) malloc(sizeof(struct elem));
   newElem->key = k;
   newElem->info = val;
+  newElem->pos = j;
 
   d->content[j] = newElem;
   (d->numchiavi)++;
@@ -68,22 +70,9 @@ void inserisci(Dizionario d, int k, int val){
 /*pre: l'elemento x e' contenuto nel dizionario d*/
 /*post: rimuove l'elemento x dal dizionario d */
 void cancella(Dizionario d, Elem x){
-  int i = 0;
-  int j;
-  int key;
-  int trovato = 0;
-  key = x->key;
-  do{
-    j = funHash(key, i);
-    if (d->content[j] == x)
-      trovato = 1;
-    else 
-      i++;
-  } while(!trovato);
+  d->content[e->pos] = d->DEL;
 
-  d->content[j] = d->DEL; 
-  (d->numchiavi)--;
-
+  free(x);
 }
 
 /*post: restituisce un elemento con chiave val se esiste, NULL altrimenti */

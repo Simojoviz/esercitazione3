@@ -11,6 +11,7 @@ struct minHeap{
 
 
 /*post: restituisce una coda di min-priorita' vuota (heapsize = 0), con dimensione size */
+/*T(n) = O(1) sono tute operazioni in tempo costante */
 MinHeap newMinHeap(int size){
 	MinHeap new;
 
@@ -29,6 +30,7 @@ MinHeap newMinHeap(int size){
 
 
 /*post: restituisce >0 se la coda di min-priorita' e' vuota, 0 atrimenti */
+/*T(n) = O(1) sono tutte operazioni in tempo costante*/
 int heapEmpty(MinHeap v){
 
 	if (v != NULL && v->heapsize > 0)
@@ -39,11 +41,13 @@ int heapEmpty(MinHeap v){
 
 /*pre: la coda e' non vuota */
 /*post: restituisce la chiave piu' piccola nella coda */
-
+/*T(n) = O(1) sono tutte operazioni in tempo costante */
 int heapMinimum(MinHeap v){
 	return v->elements[0];
 }
 
+/*Come visto a lezione la complessità è O(h) con h altezza del nodo i, visto 
+che un min_heap ha altezza log(n) allora T(n) = log(n)*/
 void min_heapfy(MinHeap v, int i) {
 	int l = 2*i + 1;
 	int r = 2*i + 2;
@@ -70,7 +74,8 @@ void min_heapfy(MinHeap v, int i) {
 
 /*pre: la coda e' non vuota */
 /*post: elimina e restituisce la chiave piu' piccola nella coda */
-
+/*L'unica operazione non in tempo costante è la min_heapfy che ha complessità O(log(n)),
+quindi T(n) = O(log(n))*/
 int heapExtractMin(MinHeap v){
 	int min = v->elements[0];
 	
@@ -88,7 +93,8 @@ int heapExtractMin(MinHeap v){
 
 /*pre: i e' un nodo dell'heap */
 /*post: decrementa il valore della chiave dell'elemento in posizione i al valore k (k <= valore corrente dell'elemento in posizione i) */
-
+/*Decrementa il valore della chiave in posizione i e risale l'heap fino al massimo
+alla radice quindi T(n) = O(log(n)) */
 void heapDecreaseKey(MinHeap v, int i, int k){
 	int temp;
 	if (k > v->elements[i]) {
@@ -105,7 +111,9 @@ void heapDecreaseKey(MinHeap v, int i, int k){
 }
 
 /*post: inserisce l'elemento con chiave k nella coda.  */
-
+/*Inserisce l'elemento alla fine dell'heap e in seguito chiama la heapDecreaseKey
+che ha complessità O(log(n)).
+Quindi T(n) = O(log(n))*/
 void heapInsert(MinHeap v, int k){
 	if (v->heapsize == v->dim) {
 		v->dim *= 2;
@@ -120,7 +128,7 @@ void heapInsert(MinHeap v, int k){
 
 /*pre: i e' un nodo dell'heap */
 /*post: cancella l’elemento nel nodo i dalla coda */
-
+/*Tutte operazioni in tempo costante tranne le min_heapfy, quindi T(n) = O(log(n))*/
 void heapDelete(MinHeap v, int i){
 	v->elements[i] = v->elements[v->heapsize - 1];
 	(v->heapsize)--;
@@ -135,6 +143,7 @@ void heapDelete(MinHeap v, int i){
 
 
 /*post: restituisce un nodo che contiene la chiave k se k e' presente nella coda di min-priorita', -1 altrimenti */
+/*Scorre al massimo tutto l'heap solo una volta quindi T(n) = O(n)*/
 int heapSearch(MinHeap v, int k){
 	int i = 0;
 	while (i < v->heapsize) {
@@ -148,6 +157,7 @@ int heapSearch(MinHeap v, int k){
 }
 
 /* post: restituisce la heapsize della coda di min-priorita' */
+/*T(n) = O(1) tutte operazioni in tempo costante*/
 int heapsize(MinHeap v){
 	if (v != NULL) 
 		return v->heapsize;
