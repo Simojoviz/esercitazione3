@@ -8,6 +8,12 @@ struct minHeap{
   int dim;
 };
 
+
+/*La complessità della funzione sarà theta((n1)log(n1) + (n2)log(n2)) con n1 la 
+dimensione del primo min_heap e n2 la dimensione del secondo min_heap.
+Questo perchà vengono eseguite tante heapExtractMin, che hanno complessità O(log(n)) 
+qunti sono gli elementi nei due min_heap e quindi n1 volte per il primo min_heap 
+e n2 volte per il secondo*/
 MinHeap intersect(MinHeap h1, MinHeap h2){
 	int size;
 	MinHeap intersect;
