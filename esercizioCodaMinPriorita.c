@@ -121,8 +121,8 @@ void heapInsert(MinHeap v, int k){
 	}
 
 	(v->heapsize)++;
-	v->elements[v->heapsize - 1] = INT_MAX;
-	heapDecreaseKey(v, v->heapsize - 1, k);
+	v->elements[heapsize(v) - 1] = INT_MAX;
+	heapDecreaseKey(v, heapsize(v) - 1, k);
 }
 
 
@@ -130,7 +130,7 @@ void heapInsert(MinHeap v, int k){
 /*post: cancella l’elemento nel nodo i dalla coda */
 /*Tutte operazioni in tempo costante tranne le min_heapfy, quindi T(n) = O(log(n))*/
 void heapDelete(MinHeap v, int i){
-	v->elements[i] = v->elements[v->heapsize - 1];
+	v->elements[i] = v->elements[heapsize(v) - 1];
 	(v->heapsize)--;
 	min_heapfy(v, i);
 
@@ -146,7 +146,7 @@ void heapDelete(MinHeap v, int i){
 /*Scorre al massimo tutto l'heap solo una volta quindi T(n) = O(n)*/
 int heapSearch(MinHeap v, int k){
 	int i = 0;
-	while (i < v->heapsize) {
+	while (i < heapsize(v)) {
 		if (v->elements[i] == k)
 			return i;
 
