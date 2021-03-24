@@ -15,9 +15,7 @@ struct minHeap{
 MinHeap newMinHeap(int size){
 	MinHeap new;
 
-	if (size < 0)
-		return NULL;
-	if (size == 0)
+	if (size <= 0)
 		size = 1;
 
 	new = (MinHeap) malloc(sizeof(struct minHeap));
@@ -98,7 +96,7 @@ alla radice quindi T(n) = O(log(n)) */
 void heapDecreaseKey(MinHeap v, int i, int k){
 	int temp;
 	if (k > v->elements[i]) {
-		fprintf(stderr, "key larger than the current one\n");
+		fprintf(stderr, "Key larger than the current one\n");
 		return;
 	}
 	v->elements[i] = k;
@@ -164,4 +162,3 @@ int heapsize(MinHeap v){
 
 	return 0;
 }
-  
